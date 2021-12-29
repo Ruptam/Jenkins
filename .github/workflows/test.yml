@@ -1,8 +1,6 @@
 #This is sample yaml file.
-name: sample-github-action
-on: 
-  - push
-  - pull-request
+#name: sample-github-action
+on: [push]
 jobs:
   print-hello-world                                 #name of the jobs
     runs-on: ubuntu-latest                          #name of image where this job is going to execute
