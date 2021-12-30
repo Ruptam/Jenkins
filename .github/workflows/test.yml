@@ -1,8 +1,12 @@
 name: My First Github Action
 on: [push]
 jobs:
-  print-hello-world:                                #name of the jobs
+  build-app:                                #name of the jobs
     runs-on: ubuntu-latest                          #name of image where this job is going to execute
     steps:                                          #defining the steps
-      - run: echo "Hello World"                     #executing the steps.
-      - run: echo "Second Hello World"
+      - uses: actions/checkout@v2                     #executing the steps.
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt' # See 'Supported distributions' for available options
+          java-version: '1.8'
+      - run: mvn -v
