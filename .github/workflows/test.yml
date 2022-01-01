@@ -12,9 +12,9 @@ jobs:
       - run: mvn clean install
       - name: copy files to ec2
         uses: appleboy/scp-action@master
-      #  with:
-      #    host: 65.2.78.183
-      #    username: githubaction
-      #    password: githubaction
+        with:
+          host: 65.2.78.183
+          username: githubaction
+          password: githubaction
       ##    source: "/home/runner/.m2/repository/com/example/demo/0.0.1-SNAPSHOT/demo-0.0.1-SNAPSHOT.war"
       #    target: "/tmp"
