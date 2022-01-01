@@ -19,3 +19,10 @@ jobs:
           port: 22
           source: "target/demo-0.0.1-SNAPSHOT.war"
           target: "/tmp"
+      - name: Deploy in ec2
+        env:
+            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+            HOSTNAME : ${{ secrets.HOSTNAME  }}
+            USER_NAME : ${{ secrets.USERNAME  }}
+        run: |
+          mv /tmp/target/demo-0.0.1-SNAPSHOT.war /opt
