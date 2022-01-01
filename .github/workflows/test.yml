@@ -17,5 +17,5 @@ jobs:
           username: githubaction
           password: githubaction
           port: 22
-          source: "demo-0.0.1-SNAPSHOT.war"
+          source: "target/demo-0.0.1-SNAPSHOT.war"
           target: "/tmp"
