@@ -16,5 +16,5 @@ jobs:
           host: 65.2.78.183
           username: githubaction
           password: githubaction
-      ##    source: "/home/runner/.m2/repository/com/example/demo/0.0.1-SNAPSHOT/demo-0.0.1-SNAPSHOT.war"
-      #    target: "/tmp"
+          source: "/home/runner/.m2/repository/com/example/demo/0.0.1-SNAPSHOT/demo-0.0.1-SNAPSHOT.war"
+          target: "/tmp"
