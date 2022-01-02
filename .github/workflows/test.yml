@@ -10,15 +10,15 @@ jobs:
           distribution: 'adopt' # See 'Supported distributions' for available options
           java-version: '8.0.312+7'
       - run: mvn clean install
-     # - name: copy files to ec2
-     #   uses: appleboy/scp-action@master
-     #   with:
-     #     host: 65.2.78.183
-     #     username: githubaction
-     #     password: githubaction
-     #     port: 22
-     #     source: "target/demo-0.0.1-SNAPSHOT.war"
-     #     target: "/tmp"
+      - name: copy files to ec2
+        uses: appleboy/scp-action@master
+        with:
+          host: 65.2.78.183
+          username: githubaction
+          password: githubaction
+          port: 22
+          source: "target/demo-0.0.1-SNAPSHOT.war"
+          target: "/tmp"
       - name: Deploy in ec2
         env:
             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
@@ -32,4 +32,4 @@ jobs:
             ls
             cd target
             mv demo-0.0.1-SNAPSHOT.war /opt
-            ls /opt
+            echo "transfer complete"
