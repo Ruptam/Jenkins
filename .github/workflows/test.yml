@@ -30,6 +30,6 @@ jobs:
             ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
             sudo su -
             ls
-            cd target
-            mv demo-0.0.1-SNAPSHOT.war /opt
+            #cd target
+            mv /tmp/target/demo-0.0.1-SNAPSHOT.war /opt
             echo "transfer complete"
