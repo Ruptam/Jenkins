@@ -1,0 +1,10 @@
+name : Getting Started
+on : [push]
+jobs:
+   my-workflow:
+    runs-on: ubuntu-latest
+    steps: 
+       name: List the directory
+       run: ls 
+     
+
