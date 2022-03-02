@@ -10,5 +10,5 @@ jobs:
           distribution: 'adopt' # See 'Supported distributions' for available options
           java-version: '8.0.312+7'
       - run: mvn clean install
-      - run: bash ${{secrets.AWS_Bucket_Name}} ${{secrets.mavenfilepath}} ${{secrets.AWS_Access_Key}} ${{secrets.AWS_Access_Secret}} {{secrets.mavenfile}}
+      - run: bash ${{secrets.AWS_Bucket_Name}} ${{secrets.mavenfilepath}} ${{secrets.AWS_Access_Key}} ${{secrets.AWS_Access_Secret}} ${{secrets.mavenfile}}
       
