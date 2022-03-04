@@ -10,7 +10,12 @@ jobs:
           distribution: 'adopt' # See 'Supported distributions' for available options
           java-version: '8.0.312+7'
       - run: mvn clean install
-      - run: apt-get update -y
+      - name: setup awscli
+        env:
+          AWS_DEFAULT_REGION: ap-south-1
+        run: |
+          which aws || sudo apt-get install awscli -y
+
       # - name: copy files to ec2
       #   uses: appleboy/scp-action@master
       #   with:
