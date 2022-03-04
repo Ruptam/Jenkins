@@ -10,12 +10,14 @@ jobs:
           distribution: 'adopt' # See 'Supported distributions' for available options
           java-version: '8.0.312+7'
       - run: mvn clean install
-      - name: setup awscli
-        env:
-          AWS_DEFAULT_REGION: ap-south-1
-        run: |
-          which aws || sudo apt-get install awscli -y
-          aws s3 ls
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: AKIAZ6B5KT5NNJ7CSVUW
+          aws-secret-access-key: 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
+          aws-region: ap-south-1
+      - name: access s3
+        run: aws s3 ls
       # - name: copy files to ec2
       #   uses: appleboy/scp-action@master
       #   with:
