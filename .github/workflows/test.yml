@@ -16,8 +16,8 @@ jobs:
           aws-access-key-id: AKIAZ6B5KT5NNJ7CSVUW
           aws-secret-access-key: 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
           aws-region: ap-south-1
-      - name: access s3
-        run: aws s3 ls
+      - name: copy the jar to s3
+        run: aws s3 cp target/demo-0.0.1-SNAPSHOT.war s3://deploymentbucketself
       # - name: copy files to ec2
       #   uses: appleboy/scp-action@master
       #   with:
