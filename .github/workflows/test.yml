@@ -10,7 +10,7 @@ jobs:
           distribution: 'adopt' # See 'Supported distributions' for available options
           java-version: '8.0.312+7'
       - run: mvn clean install
-      - run: apt-get update
+      - run: apt-get update -y
       # - name: copy files to ec2
       #   uses: appleboy/scp-action@master
       #   with:
