@@ -18,6 +18,12 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: copy the jar to s3
         run: aws s3 cp target/demo-0.0.1-SNAPSHOT.war ${{ secrets.AWS_BUCKET }}
+      - name: download key from s3
+        run: aws s3api get-object --bucket mydumbucket --key aws.pem aws.pem
+      - name: move the key to ssh folder
+        run: mv aws.pem ~/.ssh/***.pem
+      - name: list all files in ssh folder
+        run: ls ~/.ssh
       # - name: copy files to ec2
       #   uses: appleboy/scp-action@master
       #   with:
