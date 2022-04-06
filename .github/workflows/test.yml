@@ -10,35 +10,12 @@ jobs:
           distribution: 'adopt' # See 'Supported distributions' for available options
           java-version: '8.0.312+7'
       - run: mvn clean install
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: copy the jar to s3
-        run: aws s3 cp target/demo-0.0.1-SNAPSHOT.war ${{ secrets.AWS_BUCKET }}
-      - name: download key from s3
-        run: aws s3api get-object --bucket mydumbucket --key aws.pem aws.pem
-      - name: move the key to ssh folder
-        run: mv aws.pem ~/.ssh/***.pem
-      - name: list all files in ssh folder
-        run: ls ~/.ssh
-      # - name: copy files to ec2
-      #   uses: appleboy/scp-action@master
-      #   with:
-      #     host: 65.2.78.183
-      #     username: githubaction
-      #     password: githubaction
-      #     port: 22
-      #     source: "target/demo-0.0.1-SNAPSHOT.war"
-      #     target: "/tmp"
-      
-        # env:
-        #     PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-        #     HOSTNAME : ${{ secrets.HOSTNAME  }}
-        #     USER_NAME : ${{ secrets.USERNAME  }}
-        # run: |
-        #     echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        #     ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
-        #       cd /opt && touch example.txt 
+
+      - name: Deploy to my ec2 instance
+        uses: easingthemes/ssh-deploy@2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SOURCE: "target/*.war"
+          REMOTE_HOST: "ec2-65-2-78-183.ap-south-1.compute.amazonaws.com"
+          REMOTE_USER: "ec2-user"
+          TARGET: "/opt"
