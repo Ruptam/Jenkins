@@ -12,7 +12,7 @@ jobs:
       - run: mvn clean install
 
       - name: Deploy to my ec2 instance
-        uses: easingthemes/ssh-deploy@v2.1.5
+        uses: easingthemes/ssh-deploy@v2.2.11
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           SOURCE: "target/demo-0.0.1-SNAPSHOT.war"
