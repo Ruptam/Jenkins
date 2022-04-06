@@ -11,11 +11,12 @@ jobs:
           java-version: '8.0.312+7'
       - run: mvn clean install
 
-      - name: Deploy to my ec2 instance
-        uses: easingthemes/ssh-deploy@v2.2.11
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          SOURCE: "target/demo-0.0.1-SNAPSHOT.war"
-          REMOTE_HOST: "ec2-65-2-78-183.ap-south-1.compute.amazonaws.com"
-          REMOTE_USER: "ec2-user"
-          TARGET: "/opt"
+      - name: ls -a via ssh
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /tmp
+            ls -a
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
