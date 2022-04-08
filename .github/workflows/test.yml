@@ -22,8 +22,11 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            cd /opt/apache-tomcat-9.0.62/webapps
-            aws s3 cp s3://deploymentbucketself/demo-0.0.1-SNAPSHOT.war .
+            rm -rf /opt/apache-tomcat-9.0.62/webapps/demo-0.0.1-SNAPSHOT.war
+            aws s3 cp s3://deploymentbucketself/demo-0.0.1-SNAPSHOT.war /opt/apache-tomcat-9.0.62/webapps
+            kill -9 $(ps ax | grep gateway-tomcat | fgrep -v grep | awk '{ print $1 }')
+            cd /opt/apache-tomcat-9.0.62/bin
+            ./startup.sh
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
