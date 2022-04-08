@@ -15,9 +15,8 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            sudo su -
-            cd /tmp/s3test
-            wget https://deploymentbucketself.s3.ap-south-1.amazonaws.com/codedeploy.zip
+            cd /opt/apache-tomcat-9.0.62/webapps
+            aws s3 cp s3://deploymentbucketself/codedeploy.zip .
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
