@@ -1,0 +1,32 @@
+name: My First Github Action
+on: [push]
+jobs:
+  build-app:                                #name of the jobs
+    runs-on: ubuntu-latest                          #name of image where this job is going to execute
+    steps:                                          #defining the steps
+      - uses: actions/checkout@v2                     #executing the steps.
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt' # See 'Supported distributions' for available options
+          java-version: '8.0.312+7'
+      - run: mvn clean install
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: copy the jar to s3
+        run: aws s3 cp target/demo-0.0.1-SNAPSHOT.war ${{ secrets.AWS_BUCKET }}
+      - name: ls -a via ssh
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            rm -rf /opt/apache-tomcat-9.0.62/webapps/demo-0.0.1-SNAPSHOT.war
+            aws s3 cp s3://deploymentbucketself/demo-0.0.1-SNAPSHOT.war /opt/apache-tomcat-9.0.62/webapps
+            cd /opt/apache-tomcat-9.0.62/bin
+            ./shutdown.sh
+            ./startup.sh
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
