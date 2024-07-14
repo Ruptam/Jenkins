@@ -1,0 +1,13 @@
+component:
+  name: MySpringBootApp
+  runtime: Ballerina
+  source:
+    location: .
+  build:
+    cmd: mvn clean package
+  run:
+    cmd: java -jar target/myapp.jar
+  exposedPort: 8080
+  env:
+    - name: JAVA_OPTS
+      value: "-Xms256m -Xmx512m"
