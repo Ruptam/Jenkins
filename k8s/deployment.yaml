@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: javamicroservice
+  template:
+    metadata:
+      labels:
+        app: javamicroservice
+    spec:
+      containers:
+      - name: javamicroservice
+        image: 794038216301.dkr.ecr.ap-south-1.amazonaws.com/gitops-webapp:<IMAGE_TAG>
+        ports:
+        - containerPort: 8080
