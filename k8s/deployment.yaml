@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: javamicroservice
-        image: 794038216301.dkr.ecr.ap-south-1.amazonaws.com/gitops-webapp:<IMAGE_TAG>
+        image: 794038216301.dkr.ecr.ap-south-1.amazonaws.com/githubactions-ecr-java:<IMAGE_TAG>
         ports:
         - containerPort: 8080
