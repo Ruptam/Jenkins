@@ -37,10 +37,10 @@ jobs:
     - name: Build with Maven
       run: mvn clean package
 
-    - name: Rename built jar for Docker build
-      run: |
-          JAR_NAME=$(ls target/*.jar | head -n 1)
-          cp "$JAR_NAME" target/myapp.jar
+    # - name: Rename built jar for Docker build
+    #   run: |
+    #       JAR_NAME=$(ls target/*.jar | head -n 1)
+    #       cp "$JAR_NAME" target/myapp.jar
 
 
     - name: Configure AWS credentials
